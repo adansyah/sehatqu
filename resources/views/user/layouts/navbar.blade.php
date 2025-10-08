@@ -1,130 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sehat Selalu Apotik Online</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8f9fa;
+        /* Animasi fade-in */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
         }
 
-        .navbar {
-            background-color: #ffffff;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
 
-        .navbar-brand {
-            font-weight: bold;
-            color: #007bff;
-        }
-
-        .navbar-nav .nav-link {
-            color: #007bff;
-            transition: color 0.3s;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #0056b3;
-        }
-
-        .btn-login {
-            background-color: #007bff;
-            color: #fff;
-            border-radius: 25px;
-            padding: 8px 20px;
-            text-transform: uppercase;
-        }
-
-        .btn-login:hover {
-            background-color: #0056b3;
-        }
-
-        .notif {
-            position: relative;
-        }
-
-        .circle {
-            position: absolute;
-            top: -1px;
-            right: -5px;
-            border-radius: 50%;
-            background-color: rgba(249, 32, 32, 0.86);
-            color: white;
-            font-size: 12px;
-            padding: 2px 9px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
 
-<body>
+<body class="bg-gray-50 font-sans text-gray-800">
 
-    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
-        <div class="container">
-            <a class="navbar-brand" href="/home">SEHAT SELALU</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white/80 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="container mx-auto flex justify-between items-center px-6 py-3 fade-in">
+            <!-- Logo -->
+            <a href="/home" class="flex items-center space-x-2">
+                <i data-feather="heart" class="text-green-500 w-6 h-6"></i>
+                <span class="text-xl font-bold text-green-600">Sehat Selalu</span>
+            </a>
+
+            <!-- Tombol Toggle (Mobile) -->
+            <button id="menu-btn"
+                class="md:hidden text-green-600 focus:outline-none hover:scale-110 transition-transform duration-300">
+                <i data-feather="menu"></i>
             </button>
 
-            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-                <ul class="navbar-nav mb-2 mb-lg-0 align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Beranda</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/obat">Obat</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dokter">Dokter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/konsultasi">Konsultasi</a>
-                    </li>
-                    <li class="nav-item position-relative ms-2">
-                        <a class="nav-link" href="/pesan">
-                            <i data-feather="message-square"></i>
-                            @if ($count > 0)
-                                <span
-                                    class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ $count }}
-                                </span>
-                            @endif
-                        </a>
-                    </li>
+            <!-- Menu -->
+            <ul id="menu"
+                class="hidden md:flex space-x-6 font-medium items-center text-green-700 transition-all duration-300">
+                <li><a href="/home" class="hover:text-green-500 transition-colors duration-200">Beranda</a></li>
+                <li><a href="/obat" class="hover:text-green-500 transition-colors duration-200">Obat</a></li>
+                <li><a href="/dokter" class="hover:text-green-500 transition-colors duration-200">Dokter</a></li>
+                <li><a href="/konsultasi" class="hover:text-green-500 transition-colors duration-200">Konsultasi</a>
+                </li>
 
-                    {{-- @auth
-                        <li class="nav-item ms-3">
-                            <form action="/logoutuser" method="POST">
-                                @csrf
-                                <button class="btn btn-outline-danger" type="submit">Logout</button>
-                            </form>
-                        </li>
-                    @else
-                        <li class="nav-item ms-3">
-                            <a class="btn btn-login" href="/login">Login</a>
-                        </li>
-                    @endauth --}}
-                </ul>
-            </div>
+                <li class="relative">
+                    <a href="/pesan"
+                        class="flex items-center space-x-1 hover:text-green-500 transition-colors duration-200">
+                        <!-- Contoh notifikasi -->
+                        @if ($count > 0)
+                            <span
+                                class="absolute -top-2 -right-3 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded-full">
+                                {{ $count }}
+                            </span>
+                        @endif
+                        <i data-feather="message-square"></i>
+
+                    </a>
+                </li>
+
+                {{-- Tombol Login / Logout --}}
+                {{-- 
+        @auth
+          <form action="/logoutuser" method="POST">
+            @csrf
+            <button type="submit"
+              class="ml-4 px-4 py-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-all duration-300">
+              Logout
+            </button>
+          </form>
+        @else
+          <a href="/login"
+            class="ml-4 px-4 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition-all duration-300">
+            Login
+          </a>
+        @endauth 
+        --}}
+            </ul>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div id="mobile-menu"
+            class="hidden md:hidden flex flex-col bg-white border-t border-gray-100 shadow-md fade-in">
+            <a href="/home" class="px-6 py-3 hover:bg-green-50 text-green-700 transition">Beranda</a>
+            <a href="/obat" class="px-6 py-3 hover:bg-green-50 text-green-700 transition">Obat</a>
+            <a href="/dokter" class="px-6 py-3 hover:bg-green-50 text-green-700 transition">Dokter</a>
+            <a href="/konsultasi" class="px-6 py-3 hover:bg-green-50 text-green-700 transition">Konsultasi</a>
+            <a href="/pesan" class="px-6 py-3 hover:bg-green-50 text-green-700 transition flex items-center space-x-2">
+                <i data-feather="message-square"></i><span>Pesan</span>
+            </a>
+            <a href="/login"
+                class="px-6 py-3 text-center bg-green-500 text-white font-medium hover:bg-green-600 transition">Login</a>
         </div>
     </nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-pzjw8f+ua7Kw1TIq0Xb2w5jRsZTtF3Fb2v9ZOxw2pZ4R3S3XtD7WnK4yG4sAApyS" crossorigin="anonymous">
-    </script>
-
+    <!-- Script -->
     <script>
         feather.replace();
-    </script>
 
+        // Toggle menu mobile
+        const btn = document.getElementById('menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>
