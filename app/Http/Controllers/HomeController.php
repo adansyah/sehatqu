@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $count = Transaksi::Where('status', 'Belum Dibayar')->count();
-        return view('user.home.halaman', compact('count'));
+        return view('awal', compact('count'));
     }
 
     public function dashboard()

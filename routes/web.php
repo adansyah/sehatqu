@@ -112,8 +112,9 @@ Route::post('/login', [DokterController::class, 'loginproses'])->name('login');
 // Route::get('register', [UserController::class, 'register']);
 Route::post('/logoutDokter', [DokterController::class, 'logout'])->name('logoutDokter');
 
+
 // user
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('awal');
 Route::get('/pesan', [HomeController::class, 'pesan']);
 Route::get('/dokter', [DokterController::class, 'index']);
 Route::get('/obat', [ObatController::class, 'index']);
